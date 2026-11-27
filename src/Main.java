@@ -13,11 +13,8 @@ public class Main {
         
         Job job = new Job("Infosys", "Java Developer", 65.0, 0, 2026);
 
-        boolean percentagePass = candidate.getPercentage() >= job.getMinimumPercentage();
-        boolean backlogPass = candidate.getBacklogs() <= job.getMaximumBacklogs();
-        boolean yearPass = candidate.getGraduationYear() <= job.getRequiredGraduationYear();
+        EligibilityRule [] rules = {new PercentageRule() , new BacklogRule(), new GraduationYearRule()};
 
-        boolean eligible = percentagePass && backlogPass && yearPass;
         System.err.println();
 
         System.out.println("================================");
@@ -29,17 +26,19 @@ public class Main {
         System.out.println("Company: " + job.getCompany());
         System.out.println("Role: " + job.getRole());
         
-        String res = (percentagePass) ? "PASS" : "FAIL";
-        System.out.println("Percentage      : " + res);
+        EligibilityChecker check = new EligibilityChecker();
 
-        res = (backlogPass) ? "PASS" : "FAIL";
-        System.out.println("Backlogs        : " + res);
+        boolean eligible = check.evaluate(candidate,job);
 
-        res = (yearPass) ? "PASS" : "FAIL";
-        System.out.println("Graduation Year : " + res);
+        System.out.println();
 
-        res = (eligible) ? "ELIGIBLE" : "NOT ELIGIBLE";
-        System.out.println("Final Result : " + res);
+        if (eligible) {
+            System.out.println("Final Result :  ELIGIBLE");
+        } else {
+            System.out.println("Final Result : NOT ELIGIBLE");
+        }
+
+        System.out.println("====================================");
 
         scanner.close();
     }
