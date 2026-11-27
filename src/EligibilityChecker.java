@@ -6,7 +6,8 @@ public class EligibilityChecker {
         rules = new EligibilityRule[] {
             new PercentageRule(),
             new BacklogRule(),
-            new GraduationYearRule()
+            new GraduationYearRule(),
+            new SkillRule() 
         };
     }
 

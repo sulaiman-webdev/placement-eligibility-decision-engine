@@ -8,10 +8,19 @@ public class Main {
         double percentage = scanner.nextDouble();
         int backlogs = scanner.nextInt();
         int graduationYear = scanner.nextInt();
-
-        Candidate candidate = new Candidate(name, percentage, backlogs, graduationYear);
+        int skillCount = scanner.nextInt();
         
-        Job job = new Job("Infosys", "Java Developer", 65.0, 0, 2026);
+        String [] skills = new String[skillCount];
+        
+        for(int i = 0; i<skills.length; i++){
+            skills[i] = scanner.next();
+        }
+
+        Candidate candidate = new Candidate(name, percentage, backlogs, graduationYear, skills);
+        
+        String [] requiredSkills = {"Java", "SQL"};
+        
+        Job job = new Job("Infosys", "Java Developer", 65.0, 0, 2026 , requiredSkills);
 
         EligibilityRule [] rules = {new PercentageRule() , new BacklogRule(), new GraduationYearRule()};
 
